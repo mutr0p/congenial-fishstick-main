@@ -73,19 +73,13 @@ if($cmd -eq "install")
 
     $downfile = "$name.zip"
     Write-Quiet "Downloading " -n; Write-Quiet "$name" -f gre -n; Write-Quiet " from " -n; Write-Quiet "$source" -f gre -n; Write-Quiet "..."
-    $oldProgressPreference = $ProgressPreference
-    $global:ProgressPreference = 'SilentlyContinue'
     if ($(find aria2)) {& $(getinstalled "aria2" executable) -x 16 -k 1M -q --dir "$dgpath\temp" -o $downfile $source}
     else {& Invoke-WebRequest $source -UseBasicParsing -OutFile "$dgpath\temp\$downfile"}
-    $global:ProgressPreference = $oldProgressPreference
 
     ### INSTALLER EXECUTION / FILE COPY ###
 
     Write-Quiet "Extracting..."
-    $oldProgressPreference = $ProgressPreference
-    $global:ProgressPreference = 'SilentlyContinue'
     & Expand-Archive -Path $dgpath\temp\$name.zip -DestinationPath $path\$name -Force
-    $global:ProgressPreference = $oldProgressPreference
 
     $countFiles = Get-ChildItem $path\$name -File | Measure-Object | Select-Object -ExpandProperty Count
     $countFolders = Get-ChildItem $path\$name -Directory | Measure-Object | Select-Object -ExpandProperty Count

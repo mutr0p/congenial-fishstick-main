@@ -73,11 +73,8 @@ if($cmd -eq "install")
 
     $downfile = "$name.exe"
     Write-Quiet "Downloading " -n; Write-Quiet "$name" -f gre -n; Write-Quiet " from " -n; Write-Quiet "$source" -f gre -n; Write-Quiet "..."
-    $oldProgressPreference = $ProgressPreference
-    $global:ProgressPreference = 'SilentlyContinue'
     if ($(find aria2)) {& $(getinstalled "aria2" executable) -x 16 -k 1M -q --dir "$dgpath\temp" -o $downfile $source}
     else {& Invoke-WebRequest $source -UseBasicParsing -OutFile "$dgpath\temp\$downfile"}
-    $global:ProgressPreference = $oldProgressPreference
 
     ### INSTALLER EXECUTION / FILE COPY ###
 
