@@ -1,4 +1,4 @@
-### IWR PORTABLE MANIFEST ###
+### PUBLIC PORTABLE MANIFEST ###
 param (
     [string]$cmd,
     [string]$trgversion,

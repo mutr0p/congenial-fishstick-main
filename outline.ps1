@@ -1,4 +1,4 @@
-### IWR NON-PORTABLE MANIFEST ###
+### PUBLIC NON-PORTABLE MANIFEST ###
 param (
     [string]$cmd,
     [string]$trgversion,
@@ -79,12 +79,12 @@ if($cmd -eq "install")
     ### INSTALLER EXECUTION / FILE COPY ###
 
     Write-Quiet "Running installer..."
-    $startParams2 = @{
+    $installerparams = @{
         FilePath     = "$dgpath\temp\$name.exe"
         Wait         = $true
         WindowStyle = 'Hidden'
     }
-    Start-Process @startParams2
+    Start-Process @installerparams
 
     ### POST-INSTALLATION STEPS ###
 
@@ -163,12 +163,12 @@ if($cmd -eq "uninstall")
 
     Write-Quiet "Deleting app..."
 
-    $startParams1 = @{
+    $uninstallerparams = @{
         FilePath     = $uninstaller
         Wait         = $true
         WindowStyle = 'Hidden'
     }
-    Start-Process @startParams1
+    Start-Process @uninstallerparams
 
     ### CHECKING IF EXECUTABLE EXISTS ###
 
